@@ -1,0 +1,30 @@
+<% layout('/layouts/boilerplate.ejs')  %>
+
+    <% if(success.length!=0 || error.length!=0) { %>
+        <div class="alert">
+           <h3><%= success %> Authentication Failed! Please refresh the page.</h3>
+         </div>
+        <% } %>
+
+
+
+        <h1 class="watchs_taital m-5">04<br>User Details</h1>
+
+        <div class="contact_section_2">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-10">
+                     <div class="mail_section_1">
+                     <form method="POST" action="/users/login">
+                        <input type="text" class="mail_text" placeholder="<%=user.username%>" required name="username">
+                        <input type="text" class="mail_text" placeholder="<%=user.email%>" required name="username">
+                        <input type="password" class="mail_text" placeholder="<%=user._id%>" required name="password">
+                        <button class="send_bt"><a>SUBMIT</a></button>
+                    </form>
+                </div>
+                      
+            </div>
+                </div>
+            </div>
+         </div>
+        </div>

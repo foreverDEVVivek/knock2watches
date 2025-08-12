@@ -42,6 +42,7 @@ const validateUser=(req,res,next)=>{
     }
 }
 
+
 const isLoggedIn=(req,res,next)=>{
     if(!req.isAuthenticated()){
         req.session.redirectUrl=req.originalUrl;
@@ -52,6 +53,8 @@ const isLoggedIn=(req,res,next)=>{
         next();
     }
 }
+
+
 
 
 module.exports={validateReview,validateTestimonial,validateWatchReview,validateUser,isLoggedIn}

@@ -57,6 +57,11 @@
                         <p class="watchs_text"><%= allWatchDetails[0].description %></p>
                         <h4 class="rate_text"><span style="color: #b60213;">$</span><%=allWatchDetails[0].price.toLocaleString('en-IN')%></h4>
                         <div class="read_bt1"><a href="/watchs/<%=allWatchDetails[0]._id%>">Buy Now</a></div>
+                          <form method="POST" action="/cart/add/<%= allWatchDetails[0]._id %>">
+                   <button type="submit" class="btn d-flex justify-content-center text-dark read_bt1 h-100 mb-6 btn-light ml-2">Add to Cart</button>
+    <input type="hidden" name="watchId" value="<%= allWatchDetails[0]._id %>">
+</form>
+
                      </div>
                   </div>
                </div>
@@ -67,6 +72,11 @@
                         <p class="watchs_text"><%= allWatchDetails[1].description %></p>
                         <h4 class="rate_text"><span style="color: #b60213;">$</span><%=allWatchDetails[1].price.toLocaleString('en-IN')%></h4>
                         <div class="read_bt1"><a href="/watchs/<%=allWatchDetails[1]._id%>">Buy Now</a></div>
+                <form method="POST" action="/cart/add/<%= allWatchDetails[1]._id %>">
+                   <button type="submit" class="btn d-flex justify-content-center text-dark read_bt1 h-100 mb-6 btn-light ml-2">Add to Cart</button>
+    <input type="hidden" name="watchId" value="<%= allWatchDetails[1]._id %>">
+</form>
+
                      </div>
                      <div class="col-md-6">
                         <div class="image_2"><img src="images/front_img2.webp"></div>

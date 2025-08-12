@@ -1,29 +1,69 @@
-const express=require('express');
-const Router=express.Router();
-const {getSignInPage,postSignInRequest,getLogInPage,postLoginRequest}=require('../controller/userController.js');
-const {validateUser,isLoggedIn}=require('../middleware.js');
-const passport=require('passport');
-const wrapAsync=require('../utils/wrapAsync.js');
+const express = require('express');
+const passport = require('passport');
+const {
+    getSignUpPage,
+    postSignUpRequest,
+    getLoginPage,
+    postLoginRequest,
+    logoutUser,
+    getProfilePage,
+    changePassword,
+    forgotPasswordPage,
+    sendPasswordResetLink,
+    resetPasswordPage,
+    resetPassword
+} = require('../controller/userController.js');
 
-Router.route('/')
-.get(getSignInPage)
-.post(validateUser,wrapAsync(postSignInRequest))
+const router = express.Router();
 
-Router.route('/login')
-.get(getLogInPage)
-.post(passport.authenticate('local', {
-    failureRedirect: '/users/login',
-    failureFlash:true,
-    failureMessage: 'Authentication failed, please try again.'
-}),wrapAsync(postLoginRequest));
+// --- SIGN UP ---3
+router.get('/signup', getSignUpPage);
+router.post('/signup', postSignUpRequest);
 
-Router.route('/login/:id',isLoggedIn,(req,res)=>{
-    res.json(
-    {
-        "test":"test"
-    }
-    );
-})
+// --- LOGIN ---
+router.get('/login', getLoginPage);
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        console.log("Login attempt:");
+        console.log("Email/Username:", req.body.username);
+        console.log("Password entered:", req.body.password); // ⚠ Never log passwords in production!
 
+        if (err) {
+            console.error("Passport error:", err);
+            return next(err);
+        }
+        if (!user) {
+            console.warn("Authentication failed:", info);
+            req.flash("error", info?.message || "Invalid credentials");
+            return res.redirect('/users/login');
+        }
 
-module.exports=Router;
+        req.logIn(user, (err) => {
+            if (err) {
+                console.error("Login error:", err);
+                return next(err);
+            }
+            console.log("User authenticated successfully:", user.email);
+            return res.redirect('/watchs');
+        });
+    })(req, res, next);
+});
+
+// --- LOGOUT ---
+router.get('/logout', logoutUser);
+
+// --- PROFILE ---
+router.get('/profile', getProfilePage);
+
+// --- CHANGE PASSWORD ---
+router.post('/change-password', changePassword);
+
+// --- FORGOT PASSWORD ---
+router.get('/forgot-password', forgotPasswordPage);
+router.post('/forgot-password', sendPasswordResetLink);
+
+// --- RESET PASSWORD ---
+router.get('/reset-password/:token', resetPasswordPage);
+router.post('/reset-password/:token', resetPassword);
+
+module.exports = router;

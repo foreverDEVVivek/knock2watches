@@ -8,7 +8,7 @@
                      <div class="col-md-6">
                         <div class="mail_section_1">
                         <form method="POST" action="/watchs/<%=watchDetail._id%>/review/<%=editReview._id%>?_method=PUT">
-                           <input type="text" class="mail_text" placeholder="Your Name" value="<%=editReview.author%>" required name="author">
+                           <input type="text" class="mail_text" placeholder="Your Name" value="<%=editReview.author.username%>" required name="author">
                            <textarea class="massage-bt" placeholder="Write a message" rows="5" required id="comment" name="comment"><%=editReview.comment%></textarea>
                            <input type="number" placeholder="rating" class="mail_text" value="<%=editReview.rating%>" required name="rating">
                            <button class="send_bt"><a>EDIT</a></button>

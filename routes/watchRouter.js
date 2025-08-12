@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const {getWatches,showWatch,reviewForWatch,deleteReviewOfWatch,renderEditReviewPage,editReviewOfWatch}=require('../controller/watchController');
-const {validateWatchReview}=require('../middleware.js');
+const {validateWatchReview, isLoggedIn}=require('../middleware.js');
 
 //Get Watches page
 router.route('/')
@@ -10,15 +10,15 @@ router.route('/')
 //Show Particular Watch
 router.route('/:id')
 .get(showWatch)
-.post(validateWatchReview,reviewForWatch)
+.post(isLoggedIn,reviewForWatch)
 
 // Delete Review for particular Watch
 router.route('/:id/review/:reviewId')
-.put(validateWatchReview,editReviewOfWatch)
-.delete(deleteReviewOfWatch);
+.put(isLoggedIn,editReviewOfWatch)
+.delete(isLoggedIn,deleteReviewOfWatch);
 
 //Rendering Edit Page of Review
 router.route('/:id/review/:reviewId/edit')
-.get(renderEditReviewPage);
+.get(isLoggedIn,renderEditReviewPage);
 
 module.exports=router;

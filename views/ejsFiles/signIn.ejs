@@ -1,25 +1,26 @@
 <% layout('/layouts/boilerplate') %>
 
-<h1 class="watchs_taital m-5">04<br>Sign In</h1>
-
 <div class="contact_section_2">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-10">
-             <div class="mail_section_1">
-             <form method="POST" action="/users">
-                <input type="text" class="mail_text" placeholder="Username" required name="username">     
-                <input type="email" class="mail_text" placeholder="Email" required name="email">    
-                <input type="password" class="mail_text" placeholder="Password" required name="password">
-                <button class="send_bt"><a>SUBMIT</a></button>
-            </form>
-            <form method="GET" action="/users/login">
-            <button class="send_bt"><div class="read_bt2 m-lg-0 mt-1 p-1"><a>Already Signed In!</a></div></button>
-            </form>
+        <div class="row justify-content-center">
+            <div class=" w-100"> <!-- Adjusted column width for better form sizing -->
+                <div class="text-center mb-4 w-100 m-lg-5  ">
+                    <h1 class="watchs_taital w-50 m-lg-5  align-content-lg-start">04<br>Sign In</h1>    
+                </div>
+                <div class="mail_section_1 w-100">
+                    <form method="POST" action="/users/signup" class="d-flex flex-column align-items-center">
+                        <input type="text" class="mail_text w-50 mb-3" placeholder="Username" required name="username">     
+                        <input type="email" class="mail_text w-50 mb-3" placeholder="Email" required name="email">    
+                        <input type="password" class="mail_text w-50 mb-3" placeholder="Password" required name="password">
+                        <button class="send_bt mb-3" type="submit"><a>SUBMIT</a></button>
+                    </form>
+                    <form method="GET" action="/users/login" class="d-flex justify-content-center">
+                        <button class="send_bt">
+                            <div class="read_bt2 m-lg-0 mt-1 p-1"><a>Already Signed In!</a></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-              
     </div>
-        </div>
-    </div>
- </div>
 </div>

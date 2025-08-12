@@ -1,0 +1,67 @@
+<% layout('/layouts/boilerplate.ejs') %>
+
+<div class="container mt-5 text-light">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold">💳 Checkout</h1>
+        <p class="text-secondary">Complete your order by providing your details below</p>
+    </div>
+
+    <form action="/checkout" method="POST" class="bg-dark p-4 rounded shadow-lg border border-secondary">
+        
+        <!-- Shipping Address -->
+        <h4 class="mb-3 border-bottom pb-2">📦 Shipping Address</h4>
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Full Name</label>
+            <input type="text" name="fullName" class="form-control bg-dark text-light border-secondary" placeholder="John Doe" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Address Line 1</label>
+            <input type="text" name="address1" class="form-control bg-dark text-light border-secondary" placeholder="123 Main Street" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Address Line 2 <span class="text-secondary">(Optional)</span></label>
+            <input type="text" name="address2" class="form-control bg-dark text-light border-secondary" placeholder="Apartment, suite, etc.">
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">City</label>
+                <input type="text" name="city" class="form-control bg-dark text-light border-secondary" placeholder="Mumbai" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">State</label>
+                <input type="text" name="state" class="form-control bg-dark text-light border-secondary" placeholder="Maharashtra" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label class="form-label fw-semibold">PIN</label>
+                <input type="text" name="pincode" class="form-control bg-dark text-light border-secondary" placeholder="400001" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Phone Number</label>
+            <input type="tel" name="phone" class="form-control bg-dark text-light border-secondary" placeholder="+91 9876543210" required>
+        </div>
+
+        <!-- Payment Method -->
+        <h4 class="mb-3 mt-4 border-bottom pb-2">💰 Payment Method</h4>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="paymentMethod" value="cod" id="cod" checked>
+            <label class="form-check-label" for="cod">Cash on Delivery</label>
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="paymentMethod" value="card" id="card">
+            <label class="form-check-label" for="card">Credit/Debit Card</label>
+        </div>
+        <div class="form-check mb-4">
+            <input class="form-check-input" type="radio" name="paymentMethod" value="upi" id="upi">
+            <label class="form-check-label" for="upi">UPI / Net Banking</label>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <a href="/cart" class="btn btn-outline-light px-4">← Back to Cart</a>
+            <button type="submit" class="btn btn-success btn-lg px-5">Place Order ✅</button>
+        </div>
+    </form>
+</div>

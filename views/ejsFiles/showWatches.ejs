@@ -1,139 +1,149 @@
 <% layout('/layouts/boilerplate.ejs') %>
-<% if(success.length!=0 || error.length!=0) { %>
 
-    <div class="alert">
-       <h3><%= success %> Please Refresh the Page.</h3>
-     </div>
- 
-    <% } %>
-<!-- background bg start -->
-<div class="background_bg">
-    <!-- watchs section start -->
-     <div class="watchs_section layout_padding">
-        <div class="container">
-           <h1 class="watchs_taital"><br>Description</h1>
-           <div class="watchs_section_2">
-              <div class="row">
-                 <div class="col-md-6">
-                  <div class="carousel_showWatches">
-                     <div class="carousel_inner_showWatches">
-                         <div class="carousel_item_showWatches active">
-                             <img src="/images/panel_img1.jpeg" alt="Image 1">
-                         </div>
-                         <div class="carousel_item_showWatches">
-                             <img src="/images/panel_img2.jpeg" alt="Image 2">
-                         </div>
-                         <div class="carousel_item_showWatches">
-                             <img src="/images/panel_img3.jpeg" alt="Image 3">
-                         </div>
-                         <div class="carousel_item_showWatches">
-                             <img src="/images/panel_img4.jpeg" alt="Image 3">
-                         </div>
-                         <div class="carousel_item_showWatches">
-                             <img src="/images/panel_img5.jpeg" alt="Image 3">
-                         </div>
-                         <div class="carousel_item_showWatches">
-                             <img src="/images/panel_img6.jpeg" alt="Image 3">
-                         </div>
-                     </div>
-                     <button class="carousel-control prev">❮</button>
-                     <button class="carousel-control next">❯</button>
-                 </div>
-               
-                 </div>
-                 <div class="col-md-6">
-                    <h4 class="uni_text"><%=watchDetail.name%></h4>
-                    <p class="watchs_text"><%=watchDetail.description%></p>
-                    <h4 class="rate_text"><span style="color: #b60213;">$</span><%=watchDetail.price.toLocaleString('en-IN')%></h4>
-                    <div class="read_bt1"><a href="/dekhtehaikyakrnahaiispeclickhonepr">Buy Now</a></div>
-                    <!-- Inactive button -->
-                    <div class="read_bt2"><a href="/watchs">Shop More!</a></div>
-                    
-                    <h1 class="rate_text">04<br>Share Your Opinion</h1>
-                    <div class="contact_section_2">
-                        <div class="container-fluid">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <div class="mail_section_1">
-                                 <form method="POST" action="/watchs/<%=watchDetail._id%>">
-                                    <input type="text" class="mail_text" placeholder="Your Name" value="" required name="author">
-                                    <textarea class="massage-bt" placeholder="Write a message" rows="5" required id="comment" name="comment"></textarea>
-                                    <input type="number" placeholder="rating" class="mail_text" value= required name="rating">
-                                    <button class="send_bt"><a>SUBMIT</a></button>
-                                 </form>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                
-                 </div>
-              </div>
-           </div>
-          
-        </div>
-     </div>
-
-     
-     <!-- watches section end -->
-            
-     <br>
-     
-  
+<% if ((success && success.length) || (error && error.length)) { %>
+  <div class="alert">
+    <h3><%= success %> Please Refresh the Page.</h3>
   </div>
-  <div class="info_showWatches">
-    **  This watch brings together style and functionality in an elegant package. The sleek stainless steel case not only enhances durability but also exudes a classic charm. The watch is designed to capture the hearts of those who appreciate practical yet fashionable timepieces. This ideal blend of form and function makes it a must-have accessory for any wardrobe. In addition to that, the robust finish of the watch makes it suitable for regular usage. This way, you can rest assured that the piece is unlikely to easily succumb to rapid tear and wear.
-</div>
-<div class="layout_padding">
-<div class="flex-box">
-    <% if(watchDetail.review.length!=0) { %>
-    <% for(review of watchDetail.review){%>
-        <div class="col-md-3">
-            <div class="box_main">
-               <p class="testimonial_text"><%=review.comment%></p>
-               <br>
-               <p class="testimonial_text author_text">-<%=review.author%></p>
-               <form method="POST" action="/watchs/<%=watchDetail._id%>/review/<%=review._id%>?_method=Delete">
-               <button class="send_bt"><a>Delete</a></button>
-            </form>
-               <!-- Inactive button -->
-               <form method="get" action="/watchs/<%=watchDetail._id%>/review/<%=review._id%>/edit"> 
-     <button class="send_bt"><div class="read_bt2 m-lg-0 mt-1 p-1"><a>Edit!</a></div></button>
-   </form>
-            </div>
-         </div>
-  <% }%>
-</div>
-</div>
-<%}%>
+<% } %>
 
-  <script>
-   document.addEventListener('DOMContentLoaded', function () {
+<!-- background bg start -->
+<div class="background_bg bg-transparent">
+  <!-- watchs section start -->
+  <div class="watchs_section layout_padding">
+    <div class="container">
+      <h1 class="watchs_taital"><br>Description</h1>
+      <div class="watchs_section_2">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="carousel_showWatches">
+              <div class="carousel_inner_showWatches">
+                <div class="carousel_item_showWatches active">
+                  <img src="/images/panel_img1.jpeg" alt="Image 1">
+                </div>
+                <div class="carousel_item_showWatches">
+                  <img src="/images/panel_img2.jpeg" alt="Image 2">
+                </div>
+                <div class="carousel_item_showWatches">
+                  <img src="/images/panel_img3.jpeg" alt="Image 3">
+                </div>
+                <div class="carousel_item_showWatches">
+                  <img src="/images/panel_img4.jpeg" alt="Image 4">
+                </div>
+                <div class="carousel_item_showWatches">
+                  <img src="/images/panel_img5.jpeg" alt="Image 5">
+                </div>
+                <div class="carousel_item_showWatches">
+                  <img src="/images/panel_img6.jpeg" alt="Image 6">
+                </div>
+              </div>
+              <button class="carousel-control prev">❮</button>
+              <button class="carousel-control next">❯</button>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h4 class="uni_text"><%= watchDetail.name %></h4>
+            <p class="watchs_text"><%= watchDetail.description %></p>
+            <h4 class="rate_text"><span style="color: #b60213;">$</span><%= watchDetail.price.toLocaleString('en-IN') %></h4>
+
+            <div class="read_bt1"><a href="/dekhtehaikyakrnahaiispeclickhonepr">Buy Now</a></div>
+            <form method="POST" action="/cart/add/<%= watchDetail._id %>">
+                   <button type="submit" class="btn d-flex justify-content-center text-dark read_bt1 h-100 mb-6 btn-light ml-2">Add to Cart</button>
+    <input type="hidden" name="watchId" value="<%= watchDetail._id %>">
+</form>
+            <div class="read_bt2"><a href="/watchs">Shop More!</a></div>
+
+            <h1 class="rate_text">04<br>Share Your Opinion</h1>
+            <div class="contact_section_2">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mail_section_1">
+                      <form method="POST" action="/watchs/<%= watchDetail._id %>">
+                        <input type="text" class="mail_text" placeholder="Your Name" required name="author">
+                        <textarea class="massage-bt" placeholder="Write a message" rows="5" required id="comment" name="comment"></textarea>
+                        <input type="number" placeholder="rating" class="mail_text" required name="rating">
+                        <button 
+  class="send_bt h-25" 
+  type="submit" 
+  style="background: linear-gradient(90deg, #ff4b2b, #ff416c); 
+         border: none; 
+         color: white; 
+         font-size: 16px; 
+         font-weight: bold; 
+         padding: 10px 20px; 
+         border-radius: 25px; 
+         cursor: pointer; 
+         transition: all 0.3s ease;">
+  SUBMIT
+</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- watches section end -->
+</div>
+
+<div class="info_showWatches">
+  This watch brings together style and functionality in an elegant package. The sleek stainless steel case not only enhances durability but also exudes a classic charm. The watch is designed to capture the hearts of those who appreciate practical yet fashionable timepieces. This ideal blend of form and function makes it a must-have accessory for any wardrobe. In addition to that, the robust finish of the watch makes it suitable for regular usage. This way, you can rest assured that the piece is unlikely to easily succumb to rapid tear and wear.
+</div>
+
+<div class="layout_padding">
+  <div class="flex-box">
+    <% if (watchDetail.reviews && watchDetail.reviews.length !== 0) { %>
+      <% for (let review of watchDetail.reviews) { %>
+        <div class="col-md-3">
+          <div class="box_main">
+            <p class="testimonial_text"><%= review.comment %></p>
+            <br>
+            <p class="testimonial_text author_text">-<%= review.author.username %></p>
+            <form method="POST" action="/watchs/<%= watchDetail._id %>/review/<%= review._id %>?_method=DELETE">
+              <button class="send_bt">Delete</button>
+            </form>
+            <form method="GET" action="/watchs/<%= watchDetail._id %>/review/<%= review._id %>/edit">
+              <button class="send_bt">Edit!</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
+    <% } %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     const carousel = document.querySelector('.carousel_inner_showWatches');
     const items = document.querySelectorAll('.carousel_item_showWatches');
     const nextButton = document.querySelector('.carousel-control.next');
     const prevButton = document.querySelector('.carousel-control.prev');
-    
+
     let currentIndex = 0;
 
     function updateCarousel() {
-        items.forEach((item, index) => {
-            item.classList.toggle('active', index === currentIndex);
-        });
-        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+      items.forEach((item, index) => {
+        item.classList.toggle('active', index === currentIndex);
+      });
+      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
     nextButton.addEventListener('click', function () {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
+      currentIndex = (currentIndex + 1) % items.length;
+      updateCarousel();
     });
 
     prevButton.addEventListener('click', function () {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        updateCarousel();
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      updateCarousel();
     });
 
     updateCarousel();
-});
-
-  </script>
+  });
+</script>

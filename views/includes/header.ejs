@@ -1,47 +1,137 @@
 <!-- header section start -->
 <div class="header_section">
     <div class="header_main">
-       <div class="mobile_menu">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-             <div class="logo_mobile"><a href="/"><img src="/images/logo.png"></a></div>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                   <li class="nav-item">
-                      <a class="nav-link" href="/">Home</a>
-                   </li>
-                   <li class="nav-item">
-                      <a class="nav-link" href="/about">About</a>
-                   </li>
-                   <li class="nav-item">
-                      <a class="nav-link" href="/watchs">Watchs</a>
-                   </li>
-                   <li class="nav-item">
-                      <a class="nav-link " href="/testimonial">Testimonial</a>
-                   </li>
-                   <li class="nav-item">
-                      <a class="nav-link " href="/contact">Contact</a>
-                   </li>
-                   <li class="nav-item">
-                     <li><a class="nav-link">Sign In</a></li>
-                   </li>
+        <!-- Mobile Menu -->
+        <div class="mobile_menu">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="logo_mobile">
+                    <a href="/"><img src="/images/logo.png" alt="Logo"></a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/watchs">Watches</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/testimonial">Testimonial</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+
+                        <% if (!user) { %>
+                            <li class="nav-item"><a class="nav-link" href="/users/login">Sign In</a></li>
+                        <% } else { %>
+                            <!-- Cart Icon with Count -->
+                            <li class="nav-item position-relative">
+                                <a href="/cart" class="nav-link">
+                                    <img src="/images/cart-icon.jpeg" alt="Cart" style="width: 24px; height: 24px;">
+                                    <span class="cart-badge"><%= typeof cartCount !== 'undefined' ? cartCount : 0 %></span>
+                                </a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="/users/logout">Logout</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/"><img src="/images/logo.png" alt="Logo"></a>
+            </div>
+            <div class="menu_main">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/watchs">Watches</a></li>
+                    <li><a href="/testimonial">Testimonial</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+                    <% if (!user) { %>
+                        <li><a href="/users/login">Sign In</a></li>
+                    <% } else { %>
+                        <li><span>Welcome, <%= user.username %></span></li>
+                        <!-- Cart Icon with Count -->
+                        <li class="position-relative">
+                            <a href="/cart">
+                                <img src="/images/cart-icon.jpeg" alt="Cart" style="width: 24px; height: 24px;">
+                                <span class="cart-badge"><%= typeof cartCount !== 'undefined' ? cartCount : 0 %></span>
+                            </a>
+                        </li>
+                        <li><a href="/users/logout">Logout</a></li>
+                    <% } %>
                 </ul>
-             </div>
-          </nav>
-       </div>
-       <div class="container-fluid">
-          <div class="logo"><a href="/"><img src="/images/logo.png"></a></div>
-          <div class="menu_main">
-             <ul>
-                <li class=""><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/watchs">Watchs</a></li>
-                <li><a href="/testimonial">Testimonial</a></li>
-                <li><a href="/contact">Contact us</a></li>
-                <li><a href="/users">Sign In</a></li>
-             </ul>
-          </div>
-       </div>
+            </div>
+        </div>
     </div>
+</div>
+<!-- header section end -->
+
+<!-- Cart Badge Style -->
+<style>
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background: red;
+        color: white;
+        font-size: 12px;
+        padding: 2px 5px;
+        border-radius: 50%;
+        font-weight: bold;
+        min-width: 18px;
+        text-align: center;
+    }
+    .cart-badge.update-bounce {
+        animation: bounce 0.3s ease;
+    }
+    @keyframes bounce {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.4); }
+        100% { transform: scale(1); }
+    }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // 🔹 Load cart count on page load
+    fetch("/cart/api")
+        .then(res => res.json())
+        .then(data => {
+            if (data.cartCount !== undefined) {
+                document.querySelectorAll(".cart-badge").forEach(badge => {
+                    badge.textContent = data.cartCount;
+                });
+            }
+        })
+        .catch(err => console.error(err));
+
+    // 🔹 Update cart count when Add to Cart is clicked
+    document.body.addEventListener("click", function (e) {
+        const btn = e.target.closest(".add-to-cart-btn");
+        if (!btn) return;
+
+        e.preventDefault();
+        const productId = btn.dataset.id;
+        const quantity = btn.closest("form")?.querySelector("input[name='quantity']")?.value || 1;
+
+        fetch(`/cart/add/${productId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ quantity })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.cartCount !== undefined) {
+                document.querySelectorAll(".cart-badge").forEach(badge => {
+                    badge.textContent = data.cartCount;
+                    badge.classList.add("update-bounce");
+                    setTimeout(() => badge.classList.remove("update-bounce"), 300);
+                });
+            }
+        })
+        .catch(err => console.error(err));
+    });
+});
+</script>

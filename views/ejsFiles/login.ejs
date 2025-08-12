@@ -1,27 +1,65 @@
 <% layout('/layouts/boilerplate') %>
-<% if(success.length!=0 || error.length!=0) { %>
-    <div class="alert">
-       <h3><%= success %> Authentication Failed! Please refresh the page.</h3>
-     </div>
-    <% } %>
- 
+<% if (success && success.length > 0) { %>
+    <div class="alert alert-success">
+        <h3><%= success %></h3>
+    </div>
+<% } %>
 
-<h1 class="watchs_taital m-5">04<br>Log In</h1>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger">
+        <h3>Authentication Failed! Please refresh the page. <%= error %></h3>
+    </div>
+<% } %>
 
-<div class="contact_section_2">
+<div class="container d-grid align-items-center" style="min-height: 100vh;">
+<div class="container d-flex flex-column justify-content-center align-items-md-start" style="min-height: 10vh;">
+     <div class="text-left">
+</div>
+</div>
+<div class="contact_section_2 container d-grid align-items-center" style="min-height: 100vh;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">
              <div class="mail_section_1">
              <form method="POST" action="/users/login">
-                <input type="text" class="mail_text" placeholder="Username" required name="username">
+<h1 class="watchs_taital mb-6  w-100">04<br>Log In</h1>
+
+                <input type="text" class="mail_text" placeholder="Email" required name="username">
                 <input type="password" class="mail_text" placeholder="Password" required name="password">
-                <button class="send_bt"><a>SUBMIT</a></button>
+                <div class="w-100 mt-3">
+  <div class="row g-3">  <!-- Added gutter spacing with g-3 -->
+    <!-- First Row -->
+    <div class="col-6">
+      <button class="send_bt w-100">
+        <a class="d-block w-100">SUBMIT</a>
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="send_bt w-100">
+        <a href="/users/forgot-password" class="d-block w-100">Forgot Password</a>
+      </button>
+    </div>
+    
+    <!-- Second Row -->
+    <div class="col-6">
+      <button class="send_bt w-100">
+        <a href="/users/signup" class="d-block w-100">Sign Up</a>
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="send_bt w-100">
+        <a href="/" class="d-block w-100">Home</a>
+      </button>
+    </div>
+  </div>
+</div>
             </form>
+         
         </div>
               
     </div>
         </div>
     </div>
  </div>
+</div>
 </div>
