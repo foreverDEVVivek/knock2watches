@@ -1,4 +1,4 @@
-const ExpressError=require("./expressError.js")
+const ExpressError=require("./ExpressError.js")
 
 function wrapAsync(fun){
  return function(req,res,next){
